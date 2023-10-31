@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import './globals.css'
-import Navbar from './components/navbar/navbar/Navbar'
+import Navbar from './components/navbar/Navbar'
 import Favicon from '../public/images/WanderInn_logo_sm.png';
 
 const font = Nunito({ subsets: ['latin'] })
