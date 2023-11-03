@@ -3,6 +3,8 @@ import { Nunito } from 'next/font/google'
 import './globals.css'
 import Navbar from './components/navbar/Navbar'
 import Favicon from '../public/images/WanderInn_logo_sm.png';
+import ClientOnly from './components/ClientOnly';
+import Modal from './components/modals/Modal';
 
 const font = Nunito({ subsets: ['latin'] })
 
@@ -21,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Navbar />
+        <ClientOnly>
+          <Modal />
+          <Navbar />
+        </ClientOnly>
         {children}
         </body>
     </html>
