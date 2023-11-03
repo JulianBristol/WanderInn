@@ -10,9 +10,9 @@ const Logo = () => {
     <Image 
     alt="Logo"
     className='hidden md:block cursor-pointer'
-    height="100"
+    height="21"
     width="100"
-    src="/images/WanderInn_logo_lg.png"
+    src="/images/WanderInn_lg.webp"
     />
   )
 }
