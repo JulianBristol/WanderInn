@@ -11,10 +11,13 @@ import Heading from '../Heading';
 import Input from '../inputs/Input';
 import { toast } from 'react-hot-toast';
 import Button from '../Button';
+/* import { useRouter } from 'next/navigation'; */
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
     const [isLoading, setIsLoading] = useState(false)
+/* 
+    const router = useRouter(); */
 
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
@@ -70,6 +73,14 @@ const RegisterModal = () => {
                 errors={errors}
                 required
             />
+            {/* <div className='text-[0.825rem]'>
+                We’ll call or text you to confirm your number. Standard message and data rates apply. {" "}
+                <span
+                className='font-semibold hover:cursor-pointer underline'
+                onClick={() => router.push("/privacy")}
+                >
+                    Privacy Policy</span>
+            </div> */}
         </div>
     )
 
