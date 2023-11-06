@@ -4,7 +4,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
 import Button from '../Button';
 
-interface ModalProps{
+interface ModalProps {
     isOpen?: boolean;
     onClose: () => void;
     onSubmit: () => void;
@@ -14,10 +14,10 @@ interface ModalProps{
     actionLabel: string;
     disabled?: boolean;
     secondaryAction?: () => void;
-    secondaryLabel?: string;
+    secondaryActionLabel?: string;
 }
 
-const Modal: FC<ModalProps> = ({ 
+const Modal: FC<ModalProps> = ({
     isOpen,
     onClose,
     onSubmit,
@@ -27,51 +27,51 @@ const Modal: FC<ModalProps> = ({
     actionLabel,
     disabled,
     secondaryAction,
-    secondaryLabel
- }) => {
+    secondaryActionLabel
+}) => {
 
-    const [showModal, setShowModal] = useState<boolean|undefined>(isOpen);
+    const [showModal, setShowModal] = useState<boolean | undefined>(isOpen);
 
     useEffect(() => {
         setShowModal(isOpen);
     }, [isOpen])
 
     const handleClose = useCallback(() => {
-      if (disabled){
-        return;
-      }
+        if (disabled) {
+            return;
+        }
 
-      setShowModal(false);
-      setTimeout(() => {
-        onClose();
-      }, 300)
+        setShowModal(false);
+        setTimeout(() => {
+            onClose();
+        }, 300)
     }, [disabled, onClose]);
 
     const handleSubmit = useCallback(() => {
-      if (disabled){
-        return;
-      }
+        if (disabled) {
+            return;
+        }
 
-      onSubmit();
+        onSubmit();
     }, [disabled, onSubmit]);
 
     const handleSecondaryAction = useCallback(() => {
-      if (disabled || !secondaryAction) {
-        return;
-      }
+        if (disabled || !secondaryAction) {
+            return;
+        }
 
-      secondaryAction();
+        secondaryAction();
 
     }, [disabled, secondaryAction])
 
-    if (!isOpen){
-      return null;
+    if (!isOpen) {
+        return null;
     }
 
-  return (
-    <>
-    <div
-    className='
+    return (
+        <>
+            <div
+                className='
       justify-center
       items-center
       flex
@@ -84,9 +84,9 @@ const Modal: FC<ModalProps> = ({
       outline-none
       focus:outline-none
     '
-    >
-      <div
-      className='
+            >
+                <div
+                    className='
       relative
       w-full
       md:w-4/6
@@ -98,18 +98,18 @@ const Modal: FC<ModalProps> = ({
       lg:h-auto
       md:h-auto
       '
-      >
-        {/* Content */}
-        <div
-        className={`
+                >
+                    {/* Content */}
+                    <div
+                        className={`
         translate
         duration-300
         h-full
         ${showModal ? "translate-y-0" : "translate-y-full"}
         ${showModal ? "opacity-100" : "opacity-0"}
         `}
-        >
-          <div className='
+                    >
+                        <div className='
           translate
           h-full
           lg:h-auto
@@ -125,8 +125,8 @@ const Modal: FC<ModalProps> = ({
           outline-none
           focus:outline-none
           '>
-            {/* Header */}
-            <div className='
+                            {/* Header */}
+                            <div className='
             flex
             items-center
             p-6
@@ -135,10 +135,10 @@ const Modal: FC<ModalProps> = ({
             relative
             border-b-[1px]
             '>
-                <div className='text-lg font-semibold'>
-                    {title}
-                </div>
-              <button className='
+                                <div className='text-lg font-semibold'>
+                                    {title}
+                                </div>
+                                <button className='
               hover:opacity-70
               p-1
               border-0
@@ -146,27 +146,39 @@ const Modal: FC<ModalProps> = ({
               right-9
               transition
               '
-              onClick={handleClose}
-              >
-                <IoMdClose size={18} />
-              </button>
-            </div>
-            {/* Body */}
-            <div className='relative p-6 flex-auto'>
-                {body}
-            </div>
-            {/* footer */}
-            <div className='flex flex-col gap-2 p-6'>
-                <div className='flex flex-row items-center gap-4 w-full'>
-                    <Button label="My Button" onClick={() => {}}/>
+                                    onClick={handleClose}
+                                >
+                                    <IoMdClose size={18} />
+                                </button>
+                            </div>
+                            {/* Body */}
+                            <div className='relative p-6 flex-auto'>
+                                {body}
+                            </div>
+                            {/* footer */}
+                            <div className='flex flex-col gap-2 p-6'>
+                                <div className='flex flex-row items-center gap-4 w-full'>
+                                    {secondaryAction && secondaryActionLabel && (
+                                        <Button
+                                            outline
+                                            disabled={disabled}
+                                            label={secondaryActionLabel}
+                                            onClick={handleSecondaryAction}
+                                        />
+                                    )}
+                                    <Button
+                                        disabled={disabled}
+                                        label={actionLabel}
+                                        onClick={handleSubmit}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </>
-  )
+        </>
+    )
 }
 
 export default Modal
