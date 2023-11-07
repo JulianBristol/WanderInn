@@ -9,3 +9,85 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+//defines the model as being named User and corresponds to the "users" collection in MongoDB
+model User {
+  //Everything here defines the fields within the user model
+  //@id specifies that the field containing @id is the primary key for Prisma
+  //@map("_id") is used to map the current field to the mongoDb "_id" field 
+  //@default(auto()) sets the id field to be automatically generated when a new user is created
+  //@db.ObjectId specifies that the field should be stored in MongoDB as the ObjectId type
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  // the question mark (?) is used to designate the field is optional
+  name String?
+  //unique means that the data in the field is not allowed to be used elsewhere
+  //email and password are optional because we are using social logins as well as email logins
+  email String? @unique
+  emailVerified DateTime?
+  image String?
+  hashedPassword String?
+  //@default sets a default value. now() sets the DateTime to now
+  createdAt DateTime @default(now())
+  //whenever the field is updated, the @updatedAt line sets the field to the current DateTime
+  updatedAt DateTime @updatedAt
+  //String[] sets String as an Array. @db.ObjectId is used to designate the field is a MongoDB objectId
+  favoriteIds String[] @db.ObjectId
+
+  accounts Account[]
+  listings Listing[]
+  reservations Reservation[]
+}
+
+model Account {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? @db.String
+  access_token String? @db.String
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String? @db.String
+  session_state String?
+
+// "User @relation(fields: [userId]" relates the model to the User model using Account's userId field
+// "references: [id]" tells the Account model to relate to the User model at the User model's "id" field 
+//"onDelete: Cascade" deletes other rows of data that rely on the current model's data. So if the account is deleted, the deletion will cascade to the deletion of the same id in the user model
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//means that while two records can have the same provider or providerAccountId, no two records can have the same combination of provider and providerAccountId. 
+  @@unique([provider, providerAccountId])
+}
+
+model Listing {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String
+  imageSrc String
+  createdAt DateTime @default(now())
+  category String
+  roomCount Int
+  bathroomCount Int
+  guestCount Int
+  locationValue String
+  userId String @db.ObjectId
+  price Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+}
+
+model Reservation {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  listingId String @db.ObjectId
+  startDate DateTime
+  endDate DateTime
+  totalPrice Int
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
