@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from './components/navbar/Navbar'
 import Favicon from '../public/images/WanderInn_logo_sm.png';
 import ClientOnly from './components/ClientOnly';
+import LoginModal from './components/modals/LoginModal';
 import RegisterModal from './components/modals/RegisterModal';
 import ToasterProvider from './providers/ToasterProvider';
 
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={font.className}>
         <ClientOnly>
           <ToasterProvider />
+          <LoginModal />
           <RegisterModal />
           <Navbar />
         </ClientOnly>

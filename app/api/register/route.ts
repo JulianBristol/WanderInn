@@ -18,7 +18,8 @@ export async function POST(
     //runs the password through bcrypt's hashing algorithm 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    //creates a Prisma user record with the email, name, and bcypt's hashed password
+    //creates a Prisma user record with the email, name, and bcrypt's hashed password
+    //This sends the data to the MongoDB Database
     const user = await prisma.user.create({
         data: {
             email,
