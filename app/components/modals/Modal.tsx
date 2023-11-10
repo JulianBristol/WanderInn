@@ -1,8 +1,8 @@
 "use client";
 
-import React, { FC, useCallback, useEffect, useState } from 'react'
-import { IoMdClose } from 'react-icons/io'
-import Button from '../Button';
+import React, { FC, useCallback, useEffect, useState } from "react";
+import { IoMdClose } from "react-icons/io";
+import Button from "../Button";
 
 interface ModalProps {
     isOpen?: boolean;
@@ -27,14 +27,13 @@ const Modal: FC<ModalProps> = ({
     actionLabel,
     disabled,
     secondaryAction,
-    secondaryActionLabel
+    secondaryActionLabel,
 }) => {
-
     const [showModal, setShowModal] = useState<boolean | undefined>(isOpen);
 
     useEffect(() => {
         setShowModal(isOpen);
-    }, [isOpen])
+    }, [isOpen]);
 
     const handleClose = useCallback(() => {
         if (disabled) {
@@ -44,7 +43,7 @@ const Modal: FC<ModalProps> = ({
         setShowModal(false);
         setTimeout(() => {
             onClose();
-        }, 300)
+        }, 300);
     }, [disabled, onClose]);
 
     const handleSubmit = useCallback(() => {
@@ -61,8 +60,7 @@ const Modal: FC<ModalProps> = ({
         }
 
         secondaryAction();
-
-    }, [disabled, secondaryAction])
+    }, [disabled, secondaryAction]);
 
     if (!isOpen) {
         return null;
@@ -71,8 +69,8 @@ const Modal: FC<ModalProps> = ({
     return (
         <>
             <div
-                className='
-      justify-center
+                className="
+                justify-center
       items-center
       flex
       overflow-x-hidden
@@ -83,10 +81,10 @@ const Modal: FC<ModalProps> = ({
       bg-neutral-800/70
       outline-none
       focus:outline-none
-    '
+    "
             >
                 <div
-                    className='
+                    className="
       relative
       w-full
       md:w-4/6
@@ -97,7 +95,7 @@ const Modal: FC<ModalProps> = ({
       h-full
       lg:h-auto
       md:h-auto
-      '
+      "
                 >
                     {/* Content */}
                     <div
@@ -109,7 +107,8 @@ const Modal: FC<ModalProps> = ({
         ${showModal ? "opacity-100" : "opacity-0"}
         `}
                     >
-                        <div className='
+                        <div
+                            className="
           translate
           h-full
           lg:h-auto
@@ -124,9 +123,11 @@ const Modal: FC<ModalProps> = ({
           bg-white
           outline-none
           focus:outline-none
-          '>
+          "
+                        >
                             {/* Header */}
-                            <div className='
+                            <div
+                                className="
             flex
             items-center
             p-6
@@ -134,30 +135,28 @@ const Modal: FC<ModalProps> = ({
             justify-center
             relative
             border-b-[1px]
-            '>
-                                <div className='text-lg font-semibold'>
-                                    {title}
-                                </div>
-                                <button className='
+            "
+                            >
+                                <div className="text-lg font-semibold">{title}</div>
+                                <button
+                                    className="
               hover:opacity-70
               p-1
               border-0
               absolute
               right-9
               transition
-              '
+              "
                                     onClick={handleClose}
                                 >
                                     <IoMdClose size={18} />
                                 </button>
                             </div>
                             {/* Body */}
-                            <div className='relative p-6 flex-auto'>
-                                {body}
-                            </div>
+                            <div className="relative p-6 flex-auto">{body}</div>
                             {/* footer */}
-                            <div className='flex flex-col gap-2 p-6'>
-                                <div className='flex flex-row items-center gap-4 w-full'>
+                            <div className="flex flex-col gap-2 p-6">
+                                <div className="flex flex-row items-center gap-4 w-full">
                                     {secondaryAction && secondaryActionLabel && (
                                         <Button
                                             outline
@@ -179,7 +178,7 @@ const Modal: FC<ModalProps> = ({
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Modal
+export default Modal;
