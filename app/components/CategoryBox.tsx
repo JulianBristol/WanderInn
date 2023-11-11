@@ -1,9 +1,10 @@
-import React, { FC } from "react";
-import { IconBase, IconType } from "react-icons";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { FC, useCallback } from "react";
+import { IconType } from "react-icons";
+import qs from "query-string"
 
 interface CategoryBoxProps {
     label: string,
-    description: string,
     icon: IconType,
     selected?: boolean,
 }
@@ -11,9 +12,41 @@ interface CategoryBoxProps {
 const CategoryBox: FC<CategoryBoxProps> = ({
     label,
     selected,
-    description,
     icon: Icon
 }) => {
+
+    const router = useRouter();
+    const params = useSearchParams();
+
+    const handleClick = useCallback(() => {
+        let currentQuery = {};
+
+        if (params){
+            //parses the url parameters into an editable object
+            currentQuery = qs.parse(params.toString());
+        }
+
+        //updates the currentQuery with the new category info
+        const updatedQuery: any = {
+            ...currentQuery,
+            category: label
+        }
+
+        //check if the new category was already selected. if so, remove it from the query
+        if (params?.get('category') === label){
+            delete updatedQuery.category;
+        }
+        
+        //generate a new url string using the updatedQuery
+        const url = qs.stringifyUrl({
+            url: '/',
+            query: updatedQuery
+        }, { skipNull: true });
+
+        //move to new url
+        router.push(url);
+    },[label, params, router])
+
     return (
         <div className={`
             flex
@@ -28,7 +61,9 @@ const CategoryBox: FC<CategoryBoxProps> = ({
             cursor-pointer
             ${selected ? "border-b-neutral-800" : "border-transparent"}
             ${selected ? "text-neutral-800" : "text-neutral-500"}
-        `}>
+        `}
+        onClick={handleClick}
+        >
             <Icon size={26}/>
             <div className="font-medium text-sm">
                 {label}

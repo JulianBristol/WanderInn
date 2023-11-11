@@ -5,3 +5,23 @@
 html, body, :root{
     height: 100%;
 }
+#test {
+    scrollbar-width: thin !important;
+}
+#test::-webkit-scrollbar {
+    width: 20px;
+    height: 10px;
+    scrollbar-width: thin !important;
+}
+#test::-webkit-scrollbar-track-piece {
+    background: #eee
+}
+#test::-webkit-scrollbar-thumb {
+    background: #cdcdcd;
+}
+#test::-webkit-scrollbar-thumb:hover {
+    background: #aaa
+}
+#test::-webkit-scrollbar-thumb:active {
+    background: #888
+}
