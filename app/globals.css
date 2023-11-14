@@ -5,23 +5,25 @@
 html, body, :root{
     height: 100%;
 }
-#test {
-    scrollbar-width: thin !important;
+.smallScroll-Vertical{
+    scrollbar-width: thin;
 }
-#test::-webkit-scrollbar {
-    width: 20px;
+.smallScroll-Vertical::-webkit-scrollbar {
+    width: 10px;
     height: 10px;
     scrollbar-width: thin !important;
 }
-#test::-webkit-scrollbar-track-piece {
-    background: #eee
+.smallScroll-Vertical::-webkit-scrollbar-track-piece {
+    background: #eee;
+    border-radius: 10px;
 }
-#test::-webkit-scrollbar-thumb {
+.smallScroll-Vertical::-webkit-scrollbar-thumb {
     background: #cdcdcd;
+    border-radius: 10px;
 }
-#test::-webkit-scrollbar-thumb:hover {
+.smallScroll-Vertical::-webkit-scrollbar-thumb:hover {
     background: #aaa
 }
-#test::-webkit-scrollbar-thumb:active {
+.smallScroll-Vertical::-webkit-scrollbar-thumb:active {
     background: #888
 }

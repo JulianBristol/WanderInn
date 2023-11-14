@@ -104,8 +104,7 @@ const Categories = () => {
     return (
         <Container>
             <div
-            id="test"
-            className="pt-4 flex flex-row items-center justify-between overflow-x-auto"
+            className="smallScroll-Vertical pt-4 flex flex-row items-center justify-between overflow-x-auto"
             >
                 {categories.map((item) => (
                     <CategoryBox 
