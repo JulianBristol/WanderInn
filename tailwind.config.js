@@ -7,6 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadowColor: {
+        "poop": "green"
+      },
+      boxShadow: {
+        "selected": "0px 0px 0px 1px #000000" 
+      },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',

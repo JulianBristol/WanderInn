@@ -27,3 +27,12 @@ html, body, :root{
 .smallScroll-Vertical::-webkit-scrollbar-thumb:active {
     background: #888
 }
+.css-d7l1ni-option{
+    background-color: rgba(228, 159, 155, 0.5) !important;
+}
+.css-tr4s17-option{
+    background-color: rgb(226 84 75) !important;
+}
+.css-tr4s17-option span{
+    color: rgba(255, 255, 255, 0.799);
+}
