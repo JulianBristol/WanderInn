@@ -5,3 +5,43 @@
 html, body, :root{
     height: 100%;
 }
+.smallScroll-Vertical{
+    scrollbar-width: thin;
+}
+.smallScroll-Vertical::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    scrollbar-width: thin !important;
+}
+.smallScroll-Vertical::-webkit-scrollbar-track-piece {
+    background: #eee;
+    border-radius: 10px;
+}
+.smallScroll-Vertical::-webkit-scrollbar-thumb {
+    background: #cdcdcd;
+    border-radius: 10px;
+}
+.smallScroll-Vertical::-webkit-scrollbar-thumb:hover {
+    background: #aaa
+}
+.smallScroll-Vertical::-webkit-scrollbar-thumb:active {
+    background: #888
+}
+.css-d7l1ni-option{
+    background-color: rgba(228, 159, 155, 0.5) !important;
+}
+.css-tr4s17-option{
+    background-color: rgb(226 84 75) !important;
+}
+.css-tr4s17-option span{
+    color: rgba(255, 255, 255, 0.799);
+}
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+    z-index: 0 !important;
+}
+.leaflet-control-attribution{
+    display: none;
+}
