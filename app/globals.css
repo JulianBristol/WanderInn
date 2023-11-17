@@ -36,3 +36,12 @@ html, body, :root{
 .css-tr4s17-option span{
     color: rgba(255, 255, 255, 0.799);
 }
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+    z-index: 0 !important;
+}
+.leaflet-control-attribution{
+    display: none;
+}

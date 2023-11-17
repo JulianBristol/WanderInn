@@ -8,6 +8,7 @@ import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
+import dynamic from "next/dynamic";
 
 enum STEPS{
     CATEGORY = 0,
@@ -49,6 +50,11 @@ const RentModal = () => {
     //watches for changes to the form field named "category" and returns its current value
     const category = watch('category')
     const location = watch('location')
+
+    const Map = useMemo(() => dynamic(() => import ("../Map"), {
+        ssr: false,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }), [location])
 
     const setCustomValue = (id: string, value: any) => {
         /* sets the value for specific form fields. Fields are identified by the id,
@@ -122,6 +128,9 @@ const RentModal = () => {
                 <CountrySelect
                     onChange={(value) => setCustomValue('location', value)}
                     value={location}
+                />
+                <Map 
+                    center={location?.latlng}
                 />
             </div>
         )

@@ -26,13 +26,12 @@ const CountrySelect: FC<CountrySelectProps> = ({
     const [focused, setFocused] = useState(false);
 
     return (
-        <div>
+        <>
         <Select
             placeholder="Anywhere"
             isClearable
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            defaultMenuIsOpen={true}
             options={getAll()}
             value={value}
             onChange={(value) => onChange(value as CountrySelectValue)}
@@ -62,7 +61,7 @@ const CountrySelect: FC<CountrySelectProps> = ({
                 }
             })}
         />
-        </div>
+        </>
     )
 }
 
