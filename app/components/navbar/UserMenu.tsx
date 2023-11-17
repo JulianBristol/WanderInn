@@ -40,7 +40,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
           className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'
           onClick={onRent}
         >
-          WanderInn Your Home
+          Share Your Home
         </div>
         <div
           onClick={toggleOpen}

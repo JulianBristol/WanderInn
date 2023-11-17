@@ -30,6 +30,7 @@ const Button: FC<ButtonProps> = ({
         hover:opacity-80
         transition
         w-full
+        select-none
         ${outline ? "bg-white" : "bg-tahiti-600"}
         ${outline ? "border-black" : "border-tahiti-600"}
         ${outline ? "text-black" : "text-white"}

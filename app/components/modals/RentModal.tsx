@@ -9,14 +9,15 @@ import CategoryInput from "../inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
 import dynamic from "next/dynamic";
+import Counter from "../inputs/Counter";
 
-enum STEPS{
+enum STEPS {
     CATEGORY = 0,
     LOCATION = 1,
-     INFO = 2,
-     IMAGES = 3,
-     DESCRIPTION = 4,
-     PRICE = 5
+    INFO = 2,
+    IMAGES = 3,
+    DESCRIPTION = 4,
+    PRICE = 5
 }
 
 const RentModal = () => {
@@ -34,7 +35,7 @@ const RentModal = () => {
         },
         reset
     } = useForm<FieldValues>({
-        defaultValues:{
+        defaultValues: {
             title: '',
             description: '',
             imageSrc: '',
@@ -50,10 +51,17 @@ const RentModal = () => {
     //watches for changes to the form field named "category" and returns its current value
     const category = watch('category')
     const location = watch('location')
+    const guestCount = watch('guestCount')
+    const roomCount = watch('roomCount')
+    const bathroomCount = watch('bathroomCount')
+    const imageSrc = watch('imageSrc')
+    const price = watch('price')
+    const title = watch('title')
+    const description = watch('description')
 
-    const Map = useMemo(() => dynamic(() => import ("../Map"), {
+    const Map = useMemo(() => dynamic(() => import("../Map"), {
         ssr: false,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }), [location])
 
     const setCustomValue = (id: string, value: any) => {
@@ -81,22 +89,22 @@ const RentModal = () => {
     //This useMemo checks if step === STEPS.PRICE and if it does, return "Create"
     //It optimizes functionality because it only executes when step === STEPS.PRICE
     const actionLabel = useMemo(() => {
-        if (step === STEPS.PRICE){
+        if (step === STEPS.PRICE) {
             return "Create";
         }
         return "Next"
-    },[step])
+    }, [step])
 
     const secondaryLabel = useMemo(() => {
-        if (step === STEPS.CATEGORY){
+        if (step === STEPS.CATEGORY) {
             return undefined;
         }
         return "Back"
-    },[step])
+    }, [step])
 
     let body = (
         <div className="flex flex-col gap-8">
-            <Heading 
+            <Heading
                 title="Which of these best describes your place?"
                 subtitle="Pick a category"
             />
@@ -105,20 +113,20 @@ const RentModal = () => {
             grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto
             ">
                 {categories.map((item) => (
-                <div key={item.label} className="col-span-1">
-                    <CategoryInput
-                        onClick={(category) => setCustomValue('category', category)}
-                        selected={category === item.label}
-                        label={item.label}
-                        icon={item.icon}
-                    />
-                </div>
+                    <div key={item.label} className="col-span-1">
+                        <CategoryInput
+                            onClick={(category) => setCustomValue('category', category)}
+                            selected={category === item.label}
+                            label={item.label}
+                            icon={item.icon}
+                        />
+                    </div>
                 ))}
             </div>
         </div>
     )
 
-    if (step === STEPS.LOCATION){
+    if (step === STEPS.LOCATION) {
         body = (
             <div className="flex flex-col gap-8">
                 <Heading
@@ -129,8 +137,39 @@ const RentModal = () => {
                     onChange={(value) => setCustomValue('location', value)}
                     value={location}
                 />
-                <Map 
+                <Map
                     center={location?.latlng}
+                />
+            </div>
+        )
+    }
+
+    if (step === STEPS.INFO) {
+        body = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="Share some basic info about your place"
+                    subtitle="What amenities do you provide?"
+                />
+                <Counter
+                    title="Guests"
+                    subtitle="How many guests do you allow?"
+                    value={guestCount}
+                    onChange={(value) => setCustomValue("guestCount", value)}
+                />
+                <hr />
+                <Counter
+                    title="Rooms"
+                    subtitle="How many rooms do you have?"
+                    value={roomCount}
+                    onChange={(value) => setCustomValue("roomCount", value)}
+                />
+                <hr />
+                <Counter
+                    title="Bathrooms"
+                    subtitle="How many bathrooms do you have?"
+                    value={bathroomCount}
+                    onChange={(value) => setCustomValue("bathroomCount", value)}
                 />
             </div>
         )
@@ -138,7 +177,7 @@ const RentModal = () => {
 
     return (
         <Modal
-            title="WanderInn Your Home"
+            title="Share Your Home"
             body={body}
             isOpen={rentModal.isOpen}
             onSubmit={onNext}
@@ -146,7 +185,7 @@ const RentModal = () => {
             actionLabel={actionLabel}
             secondaryActionLabel={secondaryLabel}
             secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-    />
+        />
     )
 }
 
