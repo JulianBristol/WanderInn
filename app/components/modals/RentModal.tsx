@@ -6,12 +6,15 @@ import useRentModal from "@/app/hooks/useRentModal";
 import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
 import dynamic from "next/dynamic";
 import Counter from "../inputs/Counter";
 import CloudinaryUpload from "../inputs/CloudinaryUpload";
 import Input from "../inputs/Input";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 enum STEPS {
     CATEGORY = 0,
@@ -23,6 +26,7 @@ enum STEPS {
 }
 
 const RentModal = () => {
+    const router = useRouter();
     const rentModal = useRentModal();
 
     const [step, setStep] = useState(STEPS.CATEGORY);
@@ -58,9 +62,6 @@ const RentModal = () => {
     const roomCount = watch('roomCount')
     const bathroomCount = watch('bathroomCount')
     const imageSrc = watch('imageSrc')
-    const price = watch('price')
-    const title = watch('title')
-    const description = watch('description')
 
     const Map = useMemo(() => dynamic(() => import("../Map"), {
         ssr: false,
@@ -87,6 +88,29 @@ const RentModal = () => {
     //Step forwards in STEPS
     const onNext = () => {
         setStep((value) => value + 1)
+    }
+
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        if (step !== STEPS.PRICE){
+            return onNext();
+        }
+
+        setIsLoading(true);
+
+        axios.post('/api/listings', data)
+        .then(() => {
+            toast.success("Listing Created successfully!")
+            router.refresh();
+            reset();
+            setStep(STEPS.CATEGORY)
+            rentModal.onClose()
+        })
+        .catch(() => {
+            toast.error("Something went wrong...")
+        })
+        .finally(() => {
+            setIsLoading(false);
+        })
     }
 
     //This useMemo checks if step === STEPS.PRICE and if it does, return "Create"
@@ -247,7 +271,7 @@ const RentModal = () => {
             title="Share Your Home"
             body={body}
             isOpen={rentModal.isOpen}
-            onSubmit={onNext}
+            onSubmit={handleSubmit(onSubmit)}
             onClose={rentModal.onClose}
             actionLabel={actionLabel}
             secondaryActionLabel={secondaryLabel}
