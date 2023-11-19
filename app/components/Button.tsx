@@ -31,8 +31,8 @@ const Button: FC<ButtonProps> = ({
         transition
         w-full
         select-none
-        ${outline ? "bg-white" : "bg-tahiti-600"}
-        ${outline ? "border-black" : "border-tahiti-600"}
+        ${outline ? "bg-white active:bg-slate-300 hover:bg-slate-200" : "bg-tahiti-600 active:bg-tahiti-900"}
+        ${outline ? "border-black" : "border-tahiti-600 active:border-tahiti-900"}
         ${outline ? "text-black" : "text-white"}
         ${small ? "py-1" : "py-3"}
         ${small ? "text-sm" : "text-md"}
