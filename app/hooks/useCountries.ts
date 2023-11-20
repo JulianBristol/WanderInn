@@ -18,7 +18,7 @@ const useCountries = () => {
     //used to select a single country
     const getByValue = (value: string) => {
         return formattedCountries.find((item) => {
-            item.value === value
+            return item.value === value
         })
     }
 

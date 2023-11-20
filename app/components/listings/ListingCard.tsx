@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation"
 import useCountries from "@/app/hooks/useCountries";
 import { format } from "date-fns";
 import Image from "next/image"
+import HeartButton from "../HeartButton";
+import Button from "../Button";
 
 interface ListingCardProps {
     data: Listing;
@@ -69,7 +71,20 @@ const ListingCard: FC<ListingCardProps> = ({
     },[reservation])
 
     return (
-        <div className="col-span-1 cursor-pointer group">
+        <div
+        onClick={() => router.push("/listings/${data.id}")}
+        className="
+            col-span-1
+            cursor-pointer
+            border-2
+            rounded-xl
+            p-2
+            hover:border-tahiti-600
+            hover:bg-tahiti-100/20
+            transition
+            group
+        "
+        >
             <div className="flex flex-col gap-2 w-full">
                 <div className="
                     aspect-square
@@ -90,7 +105,35 @@ const ListingCard: FC<ListingCardProps> = ({
                             transition
                         "
                     />
+                    <div className="absolute top-3 right-3">
+                        <HeartButton
+                            listingId={data.id}
+                            currentUser={currentUser}
+                        />
+                    </div>
                 </div>
+                <div className="font-semibold text-lg">
+                    {location?.region}, <span className="group-hover:text-tahiti-900">{location?.label}</span>
+                </div>
+                <div className="font-light text-neutral-500">
+                    {reservationDate || data.category}
+                </div>
+                <div className="flex-row flex items-center gap-1">
+                    <div className="font-semibold group-hover:text-tahiti-900">
+                        $ {price}
+                    </div>
+                    {!reservation && (
+                        <div className="font-light">night</div>
+                    )}
+                </div>
+                {onAction && actionLabel && (
+                    <Button
+                        disabled={disabled}
+                        small
+                        label={actionLabel}
+                        onClick={handleCancel}
+                    />
+                )}
             </div>
         </div>
     )
