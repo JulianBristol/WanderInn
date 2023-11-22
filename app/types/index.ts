@@ -15,5 +15,5 @@ export type SafeListing = Omit<
     Listing,
     "createdAt"
 > & {
-    createAt: string;
+    createdAt: string;
 }

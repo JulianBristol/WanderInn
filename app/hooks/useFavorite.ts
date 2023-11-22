@@ -27,6 +27,7 @@ const useFavorite = ({
     const toggleFavorite = useCallback(async(
         e: React.MouseEvent<HTMLDivElement>
     ) => {
+        //stops the initial action of the mouse event
         e.stopPropagation();
 
         //open login modal if not signed in
