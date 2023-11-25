@@ -90,7 +90,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
             />
             <MenuItem
               onClick={rentModal.onOpen}
-              label="WanderInn My Home"
+              label="Share Your Home"
             />
             <hr />
             <MenuItem
