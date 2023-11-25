@@ -44,7 +44,7 @@ const ListingHead: FC<ListingHeadProps> = ({
                 src={imageSrc}
                 alt={`image of the ${title}`}
                 fill
-                className='object-hover w-full'
+                className='object-cover w-full'
             />
             <div className='absolute top-5 right-5'>
                 <HeartButton
