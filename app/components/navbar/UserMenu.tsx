@@ -97,7 +97,7 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
             />
             <MenuItem
               onClick={() => {
-                router.push('/listings')
+                router.push('/properties')
                 toggleOpen()
               }}
               label="My Properties"
