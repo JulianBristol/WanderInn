@@ -96,6 +96,7 @@ const ListingCard: FC<ListingCardProps> = ({
                         alt="Listing"
                         src={data.imageSrc}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="
                             object-cover
                             h-full
@@ -103,6 +104,7 @@ const ListingCard: FC<ListingCardProps> = ({
                             group-hover:scale-110
                             transition
                         "
+                        priority
                     />
                     <div className="absolute top-3 right-3">
                         <HeartButton

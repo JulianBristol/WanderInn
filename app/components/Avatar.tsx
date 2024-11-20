@@ -11,11 +11,12 @@ const Avatar: FC<AvatarProps> = ({ src }) => {
   return (
     <div>
       <Image
-      className="rounded-full"
+      className="rounded-full h-auto w-auto"
       alt='Avatar'
       src={src ? src : "/images/avatar.jpg"}
       height="30"
       width="30"
+      priority
       />
     </div>
   )

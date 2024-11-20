@@ -57,23 +57,25 @@ const LoginModal = () => {
             subtitle='Login through your account'
             center
             />
-            <Input 
-                id="email"
-                label="Email"
-                disabled={isLoading}
-                register={register}
-                errors={errors}
-                required
-            />
-            <Input 
-                id="password"
-                label="Password"
-                type='password'
-                disabled={isLoading}
-                register={register}
-                errors={errors}
-                required
-            />
+            <form>
+                <Input 
+                    id="email"
+                    label="Email"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                <Input 
+                    id="password"
+                    label="Password"
+                    type='password'
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+            </form>
         </div>
     )
 

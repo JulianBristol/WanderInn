@@ -15,6 +15,24 @@ interface InputProps {
   errors: FieldErrors;
 }
 
+
+const handleInputProps = (id:string) => {
+  switch (id) {
+    case "password":
+      return { autoComplete: "current-password" };
+    case "username":
+      return { autoComplete: "username" };
+    case "name":
+      return { autoComplete: "name" };
+    case "email":
+      return { autoComplete: "email" };
+    case "new-password":
+      return { autoComplete: "new-password" };
+    default:
+      return {};
+  }
+};
+
 const Input: FC<InputProps> = ({
   id,
   label,
@@ -39,6 +57,7 @@ const Input: FC<InputProps> = ({
         {...register(id, { required })}
         placeholder=' '
         type={type}
+        {...handleInputProps(id)}
         className={`
       peer
       w-full

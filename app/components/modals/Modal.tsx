@@ -68,7 +68,7 @@ const Modal: FC<ModalProps> = ({
 
     return (
         <>
-            <div
+            <div onClick={handleClose}
                 className="
                 justify-center
       items-center
@@ -99,6 +99,9 @@ const Modal: FC<ModalProps> = ({
                 >
                     {/* Content */}
                     <div
+                    onClick={(e) => {
+                        e.stopPropagation(); // Prevent click event from bubbling to the parent
+                      }}
                         className={`
         translate
         duration-300

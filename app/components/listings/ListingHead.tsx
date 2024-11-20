@@ -45,6 +45,7 @@ const ListingHead: FC<ListingHeadProps> = ({
                 alt={`image of the ${title}`}
                 fill
                 className='object-cover w-full'
+                priority
             />
             <div className='absolute top-5 right-5'>
                 <HeartButton

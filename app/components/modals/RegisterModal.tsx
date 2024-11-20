@@ -53,31 +53,33 @@ const RegisterModal = () => {
             subtitle='Create an account'
             center
             />
-            <Input 
-                id="email"
-                label="Email"
-                disabled={isLoading}
-                register={register}
-                errors={errors}
-                required
-            />
-            <Input 
-                id="name"
-                label="Name"
-                disabled={isLoading}
-                register={register}
-                errors={errors}
-                required
-            />
-            <Input 
-                id="password"
-                label="Password"
-                type='password'
-                disabled={isLoading}
-                register={register}
-                errors={errors}
-                required
-            />
+            <form>
+                <Input 
+                    id="email"
+                    label="Email"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                <Input 
+                    id="name"
+                    label="Name"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+                <Input 
+                    id="password"
+                    label="Password"
+                    type='password'
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+            </form>
             {/* <div className='text-[0.825rem]'>
                 We’ll call or text you to confirm your number. Standard message and data rates apply. {" "}
                 <span
